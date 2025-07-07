@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="Quest2.css">
+
+    <title>Questão 2</title>
+</head>
+<body>
+    <div class="principal">
+        <h1>Conversor</h1>
+
+        <h3>Digite o valor desejado em reais: </h3>
+        <form id="form" onsubmit="return converter()">
+            <input type="number" id="valor">
+            <select id="opcoes" onchange="converter(this.value)">
+                <option value="0">Selecione uma moeda</option>
+                <option value="1">Dólar</option>
+                <option value="2">Euro</option>
+                <option value="3">Libra</option>
+                <option value="4">Bitcoin</option>
+            </select>
+        </form>
+        <h3 id="resultado"></h3>
+    </div>
+
+    <script src="Quest2.js"></script>
+</body>
+</html>
