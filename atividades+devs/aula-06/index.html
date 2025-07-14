@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Endereços</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="container py-4">
+  <h2>Cadastro de Endereços</h2>
+  <form id="form-endereco" class="row g-3" onsubmit="return false;">
+    <input type="hidden" id="id">
+    <div class="col-md-6">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="nome" autocomplete="off">
+      <div id="mensagem-erro" class="alert alert-danger mt-2 py-1 px-2" style="display:none; font-size:0.95em;"></div>
+    </div>
+    <div class="col-md-6">
+      <label for="cep" class="form-label">CEP</label>
+      <input type="text" class="form-control" id="cep" maxlength="8" autocomplete="off" onblur="buscarCEP()">
+    </div>
+    <div class="col-md-3">
+      <label for="estado" class="form-label">Estado</label>
+      <input type="text" class="form-control" id="estado" readonly>
+    </div>
+    <div class="col-md-3">
+      <label for="cidade" class="form-label">Cidade</label>
+      <input type="text" class="form-control" id="cidade" readonly>
+    </div>
+    <div class="col-md-3">
+      <label for="bairro" class="form-label">Bairro</label>
+      <input type="text" class="form-control" id="bairro" readonly>
+    </div>
+    <div class="col-md-3">
+      <label for="logradouro" class="form-label">Logradouro</label>
+      <input type="text" class="form-control" id="logradouro" readonly>
+    </div>
+    <div class="col-12">
+      <button type="button" id="btnCadastrar" class="btn btn-primary" onclick="cadastrar()">Cadastrar</button>
+      <button type="button" id="btnAlterar" class="btn btn-primary" style="display:none;" onclick="alterar()">Alterar</button>
+      <button type="button" id="btnRemover" class="btn btn-primary" style="display:none;" onclick="remover()">Remover</button>
+      <button type="button" id="btnCancelar" class="btn btn-primary" style="display:none;" onclick="cancelar()">Cancelar</button>
+    </div>
+  </form>
+
+  <hr>
+  <h4>Endereços Cadastrados</h4>
+  <table class="table table-bordered" id="tabela">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CEP</th>
+        <th>Endereço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Linhas geradas pelo JS -->
+    </tbody>
+  </table>
+
+  <script src="script.js"></script>
+  <script>
+    function mostrarErro(msg) {
+      const div = document.getElementById('mensagem-erro');
+      div.textContent = msg;
+      div.style.display = 'block';
+      setTimeout(() => { div.style.display = 'none'; }, 3000);
+    }
+    const oldCadastrar = window.cadastrar;
+    window.cadastrar = function() {
+      let nome = document.getElementById('nome').value.trim();
+      let cep = document.getElementById('cep').value.trim();
+      if (!nome || !cep) {
+        mostrarErro('Preencha o nome e o CEP!');
+        return;
+      }
+      oldCadastrar();
+    }
+  </script>
+</body>
+</html>
